@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Send, X } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import api from '../services/api'
+import api from '../../services/api'
 
 const TIPOS = ['aviso_general','cuota_vencida','evento_proximo','resultado']
 const TIPO_COLOR = {

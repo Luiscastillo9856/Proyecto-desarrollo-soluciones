@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Users, CreditCard, Calendar, AlertTriangle } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
-import api from '../services/api'
+import api from '../../services/api'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 
@@ -96,20 +96,20 @@ export default function Dashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
         <StatCard
           icon={Users} label="Jugadores" value={jugadores.length}
-          accent="var(--accent2)" onClick={() => navigate('/jugadores')}
+          accent="var(--accent2)" onClick={() => navigate('/admin/jugadores')}
         />
         <StatCard
           icon={CreditCard} label="Deudas activas" value={pendientes.length}
-          accent="var(--warning)" onClick={() => navigate('/pagos')}
+          accent="var(--warning)" onClick={() => navigate('/admin/pagos')}
         />
         <StatCard
           icon={AlertTriangle} label="Pagos vencidos"
           value={pendientes.filter(p => p.estado === 'vencido').length}
-          accent="var(--danger)" onClick={() => navigate('/pagos')}
+          accent="var(--danger)" onClick={() => navigate('/admin/pagos')}
         />
         <StatCard
           icon={Calendar} label="Próximos eventos" value={eventos.length}
-          accent="var(--accent)" onClick={() => navigate('/eventos')}
+          accent="var(--accent)" onClick={() => navigate('/admin/eventos')}
         />
       </div>
 
@@ -182,7 +182,7 @@ export default function Dashboard() {
           <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 18, fontWeight: 700 }}>
             PAGOS PENDIENTES Y VENCIDOS
           </h2>
-          <button className="btn btn-ghost" style={{ fontSize: 13 }} onClick={() => navigate('/pagos')}>
+          <button className="btn btn-ghost" style={{ fontSize: 13 }} onClick={() => navigate('/admin/pagos')}>
             Ver todos →
           </button>
         </div>

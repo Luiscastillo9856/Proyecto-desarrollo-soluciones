@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Plus, Search, X } from 'lucide-react'
-import api from '../services/api'
+import api from '../../services/api'
 
 const POSICIONES = ['portero','defensa','mediocampista','delantero']
 const ESTADOS    = ['activo','inactivo','lesionado']

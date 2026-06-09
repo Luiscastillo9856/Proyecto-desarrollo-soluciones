@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Plus, X } from 'lucide-react'
-import api from '../services/api'
+import api from '../../services/api'
 
 const ESTADOS     = ['pagado','pendiente','vencido','exonerado']
 const ESTADO_CLASS = { pagado: 'badge-green', pendiente: 'badge-yellow', vencido: 'badge-red', exonerado: 'badge-gray' }

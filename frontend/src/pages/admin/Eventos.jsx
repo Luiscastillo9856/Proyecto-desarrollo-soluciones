@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Plus, X, Users } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import api from '../services/api'
+import api from '../../services/api'
 
 const TIPOS = ['entrenamiento','partido','torneo','reunion']
 const TIPO_COLOR = {
