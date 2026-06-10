@@ -124,7 +124,9 @@ export default function Inicio() {
         <h2 style={{ fontFamily: 'var(--font-head)', fontSize: 16, fontWeight: 700, letterSpacing: .5, color: 'var(--text-muted)' }}>
           PRÓXIMOS EVENTOS
         </h2>
-        <button onClick={() => navigate('/padres/calendario')} style={{ fontSize: 13, color: 'var(--accent)' }}>
+        <button onClick={() => navigate('/padres/calendario')} style={{ display: 'flex', alignItems: 'center', gap: '1rem',
+  padding: '.65rem', borderRadius: 8, background: 'var(--surface)',
+  border: '1px solid var(--border)', }}>
           Ver todos
         </button>
       </div>
