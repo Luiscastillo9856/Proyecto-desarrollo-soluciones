@@ -93,106 +93,108 @@ export default function Eventos() {
   }
 
   return (
-    <div className="fade-up">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
-        <div>
-          <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800 }}>EVENTOS</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>{eventos.length} eventos registrados</p>
-        </div>
-        <button className="btn btn-accent" onClick={abrirCrear}>
-          <Plus size={16} /> Nuevo evento
-        </button>
-      </div>
-
-      {/* Filtro por tipo */}
-      <div style={{ display: 'flex', gap: '.5rem', marginBottom: '1.5rem' }}>
-        {['todos', ...TIPOS].map(t => (
-          <button
-            key={t} onClick={() => setFiltro(t)}
-            className="btn btn-ghost"
-            style={{
-              fontSize: 13, padding: '.4rem .9rem',
-              background: filtro === t ? 'var(--surface2)' : 'transparent',
-              color: filtro === t ? 'var(--text)' : 'var(--text-muted)',
-              borderColor: filtro === t ? TIPO_COLOR[t] || 'var(--accent)' : 'var(--border)',
-            }}
-          >
-            {t.charAt(0).toUpperCase() + t.slice(1)}
+    <>
+      <div className="fade-up">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+          <div>
+            <h1 style={{ fontFamily: 'var(--font-head)', fontSize: 32, fontWeight: 800 }}>EVENTOS</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>{eventos.length} eventos registrados</p>
+          </div>
+          <button className="btn btn-accent" onClick={abrirCrear}>
+            <Plus size={16} /> Nuevo evento
           </button>
-        ))}
-      </div>
-
-      {/* Lista de eventos */}
-      {loading ? (
-        <p style={{ color: 'var(--text-muted)' }}>Cargando...</p>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-          {filtrados.map(ev => (
-            <div key={ev.id} className="card" style={{
-              display: 'flex', alignItems: 'center', gap: '1.25rem',
-              padding: '1rem 1.25rem',
-            }}>
-              {/* Fecha */}
-              <div style={{
-                fontFamily: 'var(--font-head)', textAlign: 'center', minWidth: 52,
-                color: TIPO_COLOR[ev.tipo],
-              }}>
-                <div style={{ fontSize: 28, fontWeight: 800, lineHeight: 1 }}>
-                  {format(new Date(ev.fecha_hora), 'dd')}
-                </div>
-                <div style={{ fontSize: 12 }}>
-                  {format(new Date(ev.fecha_hora), 'MMM', { locale: es }).toUpperCase()}
-                </div>
-              </div>
-
-              {/* Info */}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem', marginBottom: 2 }}>
-                  <span style={{
-                    fontSize: 11, fontWeight: 700, letterSpacing: .5, textTransform: 'uppercase',
-                    color: TIPO_COLOR[ev.tipo],
-                  }}>{ev.tipo}</span>
-                  {ev.categoria && (
-                    <span className="badge badge-gray" style={{ fontSize: 11 }}>{ev.categoria}</span>
-                  )}
-                  {ev.resultado && (
-                    <span className="badge badge-green" style={{ fontSize: 11 }}>
-                      {ev.es_local ? 'Local' : 'Visitante'} · {ev.resultado}
-                    </span>
-                  )}
-                </div>
-                <div style={{ fontWeight: 600, fontSize: 15 }}>{ev.titulo}</div>
-                <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                  {format(new Date(ev.fecha_hora), 'HH:mm')} · {ev.lugar || 'Sin lugar'}
-                  {ev.rival && ` · vs ${ev.rival}`}
-                </div>
-              </div>
-
-              {/* Acciones */}
-              <div style={{ display: 'flex', gap: '.5rem', flexShrink: 0 }}>
-                <button
-                  className="btn btn-ghost"
-                  style={{ fontSize: 12, padding: '.35rem .7rem' }}
-                  onClick={() => abrirAsistencias(ev)}
-                >
-                  <Users size={13} /> Asistencia
-                </button>
-                <button className="btn btn-ghost" style={{ fontSize: 12, padding: '.35rem .7rem' }} onClick={() => abrirEditar(ev)}>
-                  Editar
-                </button>
-                <button className="btn btn-danger" style={{ fontSize: 12, padding: '.35rem .7rem' }} onClick={() => eliminar(ev.id)}>
-                  <X size={12} />
-                </button>
-              </div>
-            </div>
-          ))}
-          {filtrados.length === 0 && (
-            <div className="card" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '3rem' }}>
-              No hay eventos de este tipo
-            </div>
-          )}
         </div>
-      )}
+
+        {/* Filtro por tipo */}
+        <div style={{ display: 'flex', gap: '.5rem', marginBottom: '1.5rem' }}>
+          {['todos', ...TIPOS].map(t => (
+            <button
+              key={t} onClick={() => setFiltro(t)}
+              className="btn btn-ghost"
+              style={{
+                fontSize: 13, padding: '.4rem .9rem',
+                background: filtro === t ? 'var(--surface2)' : 'transparent',
+                color: filtro === t ? 'var(--text)' : 'var(--text-muted)',
+                borderColor: filtro === t ? TIPO_COLOR[t] || 'var(--accent)' : 'var(--border)',
+              }}
+            >
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        {/* Lista de eventos */}
+        {loading ? (
+          <p style={{ color: 'var(--text-muted)' }}>Cargando...</p>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
+            {filtrados.map(ev => (
+              <div key={ev.id} className="card" style={{
+                display: 'flex', alignItems: 'center', gap: '1.25rem',
+                padding: '1rem 1.25rem',
+              }}>
+                {/* Fecha */}
+                <div style={{
+                  fontFamily: 'var(--font-head)', textAlign: 'center', minWidth: 52,
+                  color: TIPO_COLOR[ev.tipo],
+                }}>
+                  <div style={{ fontSize: 28, fontWeight: 800, lineHeight: 1 }}>
+                    {format(new Date(ev.fecha_hora), 'dd')}
+                  </div>
+                  <div style={{ fontSize: 12 }}>
+                    {format(new Date(ev.fecha_hora), 'MMM', { locale: es }).toUpperCase()}
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem', marginBottom: 2 }}>
+                    <span style={{
+                      fontSize: 11, fontWeight: 700, letterSpacing: .5, textTransform: 'uppercase',
+                      color: TIPO_COLOR[ev.tipo],
+                    }}>{ev.tipo}</span>
+                    {ev.categoria && (
+                      <span className="badge badge-gray" style={{ fontSize: 11 }}>{ev.categoria}</span>
+                    )}
+                    {ev.resultado && (
+                      <span className="badge badge-green" style={{ fontSize: 11 }}>
+                        {ev.es_local ? 'Local' : 'Visitante'} · {ev.resultado}
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ fontWeight: 600, fontSize: 15 }}>{ev.titulo}</div>
+                  <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+                    {format(new Date(ev.fecha_hora), 'HH:mm')} · {ev.lugar || 'Sin lugar'}
+                    {ev.rival && ` · vs ${ev.rival}`}
+                  </div>
+                </div>
+
+                {/* Acciones */}
+                <div style={{ display: 'flex', gap: '.5rem', flexShrink: 0 }}>
+                  <button
+                    className="btn btn-ghost"
+                    style={{ fontSize: 12, padding: '.35rem .7rem' }}
+                    onClick={() => abrirAsistencias(ev)}
+                  >
+                    <Users size={13} /> Asistencia
+                  </button>
+                  <button className="btn btn-ghost" style={{ fontSize: 12, padding: '.35rem .7rem' }} onClick={() => abrirEditar(ev)}>
+                    Editar
+                  </button>
+                  <button className="btn btn-danger" style={{ fontSize: 12, padding: '.35rem .7rem' }} onClick={() => eliminar(ev.id)}>
+                    <X size={12} />
+                  </button>
+                </div>
+              </div>
+            ))}
+            {filtrados.length === 0 && (
+              <div className="card" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '3rem' }}>
+                No hay eventos de este tipo
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Modal crear/editar evento */}
       {modal && (
@@ -300,6 +302,6 @@ export default function Eventos() {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
